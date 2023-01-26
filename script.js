@@ -1,7 +1,7 @@
 const form = document.querySelector("form");
 const popup = document.querySelector(".popup");
 const errorPopUp = document.querySelector(".errorPopUp");
-const successPopUp = document.querySelector(".success");
+const successPopUp = document.querySelector(".successPopUp");
 const popupContainer = document.querySelector(".popupContainer");
 //inputs fields for validation:
 const fname = document.querySelector("#fname");
@@ -73,33 +73,38 @@ function resetCheckboxes() {
 form.addEventListener("submit", (e) => {
   const errorMessages = [];
   //first name valisation
-  if (!/^[A-Za-z\s]*$/.test(fname.value)) {
-    errorMessages.push("First name must contain only letters and whitespaces.");
+  if (!/^[A-Za-z\s]+$/.test(fname.value)) {
+    errorMessages.push("First name is required and must contain only letters and whitespaces.");
   }
   //last name validation
-  if (!/^[A-Za-z\s]*$/.test(lname.value)) {
-    errorMessages.push("First name must contain only letters and whitespaces.");
+  if (!/^[A-Za-z\s]+$/.test(lname.value)) {
+    errorMessages.push("Last name is required and must contain only letters and whitespaces.");
   }
   //security number format validation
-  if (!/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/.test(secNumber)) {
-    errorMessages.push("Security number must be in this format DDD-DD-DDDD where D is any digit between 0 to 9. ");
+  console.log(secNumber.value);
+
+  if (!/^[0-9]{3}-[0-9]{2}-[0-9]{4}$/.test(secNumber.value)) {
+    errorMessages.push(
+      "Security number is required and must be in this format DDD-DD-DDDD where D is any digit between 0 to 9. "
+    );
   }
-  if (!/^[a-zA-z0-9]+$\s/.test(fundName)) {
-    errorMessages.push("Fund name must consist of english letters, numbers and whitespaces only. ");
+  if (!/^[a-zA-Z0-9\s]+$/.test(fundName.value)) {
+    errorMessages.push("Fund name is required and must consist of english letters, numbers and whitespaces only. ");
   }
-  if (!/^[0-9]+$/.test(fundNumber)) {
-    errorMessages.push("Fund number must consist only digits. ");
+  if (!/^[0-9]+$/.test(fundNumber.value)) {
+    errorMessages.push("Fund number is required and must consist only digits. ");
   }
-  if (!/^[0-9]+$/.test(accountNumber)) {
-    errorMessages.push("Account number must consist only digits. ");
+  if (!/^[0-9]+$/.test(accountNumber.value)) {
+    errorMessages.push("Account number is required and must consist only digits. ");
   }
-  if (Number(withdraAmount) < 99000) {
-    errorMessages.push("Withdrawal amount must be less than 99000. ");
+
+  if (Number(withdraAmount.value) > 99000 || withdraAmount.value === "") {
+    errorMessages.push("Withdrawal amount is required and must be less than 99000. ");
   }
 
   if (errorMessages.length > 0) {
     e.preventDefault();
-
+    popup.style.backgroundColor = "rgb(218, 92, 92)";
     const errorTitle = document.createElement("h1");
     const errorTitleSecondary = document.createElement("h3");
     const ul = document.createElement("ul");
@@ -116,6 +121,14 @@ form.addEventListener("submit", (e) => {
       errorPopUp.appendChild(errorDiv);
     });
     popupContainer.style.display = "flex";
+  } else {
+    e.preventDefault();
+    popup.style.backgroundColor = "rgb(145, 196, 82)";
+    const successTitle = document.createElement("h1");
+
+    successPopUp.appendChild(successTitle);
+    successTitle.innerText = "Your Form was sent successfully!";
+    popupContainer.style.display = "flex";
   }
 });
 
@@ -123,6 +136,7 @@ form.addEventListener("submit", (e) => {
 popup.addEventListener("click", () => {
   popupContainer.style.display = "none";
   errorPopUp.innerHTML = "";
+  successPopUp.innerHTML = "";
 });
 
 // paymentWithdrawCheck.addEventListener("change", (e) => {
