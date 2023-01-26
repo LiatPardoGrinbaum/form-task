@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet" />
+    <title>Form Liat</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="popupContainer">
+        <div class="popup">
+          <p class="exitPopup">X</p>
+          <div class="errorPopUp"></div>
+          <div class="successPopUp"></div>
+        </div>
+      </div>
+      <form action="/" method="get">
+        <div class="inputsName">
+          <input type="text" id="fname" placeholder="First Name" />
+          <input type="text" id="lname" placeholder="Last Name" />
+        </div>
+        <div class="inputs">
+          <input type="text" id="secNumber" placeholder="Social Security Number" />
+        </div>
+        <div class="inputs">
+          <input type="text" id="phone" placeholder="Mobile Phone Number" />
+        </div>
+        <div class="inputs">
+          <input type="email" id="email" placeholder="Email" />
+        </div>
+
+        <div class="inputsRadio">
+          <p>Types of form to send:</p>
+          <div class="radioDiv">
+            <input type="radio" id="radio1" value="fund withdrawal request" name="radio" />
+            <label for="radio1">fund withdrawal request</label>
+          </div>
+          <div class="radioDiv">
+            <input type="radio" id="radio2" value="Fund transfer cancel request" name="radio" />
+            <label for="radio2">Fund transfer cancel request</label>
+          </div>
+          <div class="radioDiv">
+            <input type="radio" id="radio3" value="Life insurance onboarding form" name="radio" />
+            <label for="radio3">Life insurance onboarding form</label>
+          </div>
+        </div>
+
+        <div class="inputs">
+          <input type="text" id="fundName" placeholder="Fund Name" />
+        </div>
+        <div class="inputs">
+          <input type="text" id="accountNumber" placeholder="Account Number" />
+        </div>
+        <div class="inputs">
+          <input type="text" id="fundNumber" placeholder="Fund Number" />
+        </div>
+
+        <div class="inputsRadio employTypeRadio">
+          <p>Employment Type:</p>
+          <div class="radioDiv">
+            <input type="radio" id="radio4" name="radioemp" />
+            <label for="radio4">Employee</label>
+          </div>
+          <div class="radioDiv">
+            <input type="radio" id="radio5" name="radioemp" />
+            <label for="radio5">Independent</label>
+          </div>
+        </div>
+
+        <div class="inputsRadio withdrawTypeRadio">
+          <p>Withdrawal Type:</p>
+          <div class="radioDiv">
+            <input type="radio" id="radio6" name="radioWithdraw" value="full" />
+            <label for="radio6">Full withdrawal</label>
+          </div>
+
+          <div class="radioDiv">
+            <input type="radio" id="radio7" name="radioWithdraw" value="partial" />
+            <label for="radio7">Partial withdrawal</label>
+            <div class="inputs withdrawAmountDiv">
+              <input type="text" id="withdraAmount" placeholder="Withdrawal Amount" />
+            </div>
+          </div>
+
+          <div class="radioDiv">
+            <input type="radio" id="radio8" name="radioWithdraw" value="automated" />
+            <label for="radio8">Automated montly withdrawal</label>
+            <div class="checkPaymentWithDiv">
+              <label> <input type="checkbox" id="paymentWithdrawCheck" />Payment withdrawal </label>
+              <div class="EligibleCheck">
+                <label> <input type="checkbox" id="eligibleTaxRefund" />Eligible for Tax Refund </label>
+                <label> <input type="checkbox" id="NotEligibleTaxRefund" />Not eligible for Tax Refund </label>
+              </div>
+              <label> <input type="checkbox" id="CorrespondingLoan" />Corresponding to a loan </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="btns">
+          <button class="btnClear">Clear Form</button>
+          <button class="btnSend" type="submit">Send Form</button>
+        </div>
+      </form>
+    </div>
+    <script src="script.js" defer></script>
+  </body>
+</html>

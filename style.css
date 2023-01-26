@@ -1,0 +1,181 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 420px;
+  max-width: 100%;
+  /* border: 1px solid black; */
+  padding: 1rem;
+}
+
+.inputs {
+  margin: 0.7rem;
+  width: 95%;
+}
+.inputs input {
+  border: none;
+  border-bottom: 1px solid gray;
+  width: 100%;
+  padding: 0.2rem;
+}
+
+.inputsName {
+  width: 100%;
+  border: none;
+}
+
+.inputsName input {
+  margin: 0.7rem;
+  border: none;
+  border-bottom: 1px solid gray;
+  padding: 0.2rem;
+}
+.inputsRadio {
+  margin: 0.7rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.inputsRadio p {
+  font-weight: bold;
+}
+
+.btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.btns .btnClear,
+.btnSend {
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+}
+
+.btnClear {
+  color: white;
+  background: rgb(88, 67, 134);
+  border: none;
+  border-radius: 0.2rem;
+}
+
+.btnSend {
+  width: 100%;
+  background: orange;
+  border: none;
+  padding: 0.5rem 0;
+  border-radius: 0.2rem;
+  color: white;
+  font-weight: bold;
+}
+
+.withdrawAmountDiv {
+  display: none;
+}
+
+.checkPaymentWithDiv {
+  /* display: flex; */
+  flex-direction: column;
+  margin-left: 1rem;
+  display: none;
+}
+
+.EligibleCheck {
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  display: none;
+}
+
+.popupContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(93, 87, 86, 0.486);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.popup {
+  position: relative;
+  width: 400px;
+  max-width: 100%;
+  min-height: 300px;
+  top: 0;
+  left: 0;
+  background: rgb(218, 92, 92);
+  margin: 2rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.popup h1 {
+  margin-bottom: 1.2rem;
+  text-align: center;
+  font-family: "Roboto Slab", serif;
+  color: white;
+  text-shadow: 1px 1px 2px #2a2121;
+}
+.popup h3 {
+  margin-bottom: 1.2rem;
+  text-align: center;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  color: white;
+  text-shadow: 1px 1px 2px #2a2121;
+}
+
+.popup li {
+  margin: 0.5rem;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  color: white;
+  text-shadow: 1px 1px 2px #2a2121;
+}
+
+.popup p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0.7rem;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+}
