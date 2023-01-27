@@ -3,18 +3,16 @@ const popup = document.querySelector(".popup");
 const errorPopUp = document.querySelector(".errorPopUp");
 const successPopUp = document.querySelector(".successPopUp");
 const popupContainer = document.querySelector(".popupContainer");
+const exitPopup = document.querySelector(".exitPopup");
 //inputs fields for validation:
 const fname = document.querySelector("#fname");
 const lname = document.querySelector("#lname");
+const fullName = document.querySelector("#fullName");
 const secNumber = document.querySelector("#secNumber");
 const fundName = document.querySelector("#fundName");
 const accountNumber = document.querySelector("#accountNumber");
 const fundNumber = document.querySelector("#fundNumber");
 const withdraAmount = document.querySelector("#withdraAmount");
-
-//buttons:
-const btnClear = document.querySelector(".btnClear");
-// const btnSend = document.querySelector(".btnSend");
 
 //withdrawal radio buttons
 const radioWithdrawButtons = document.querySelectorAll(`input[name="radioWithdraw"]`);
@@ -26,13 +24,10 @@ radioWithdrawButtons.forEach((WithdrawBtn) => {
 
   WithdrawBtn.addEventListener("change", (e) => {
     if (e.target.value === "partial") {
-      // console.log("partial");
-
       withdrawAmountDiv.style.display = "block";
       checkPaymentWith.style.display = "none";
       resetCheckboxes();
     } else if (e.target.value === "automated") {
-      // console.log("automated");
       withdrawAmountDiv.style.display = "none";
       withdraAmountInput.value = "";
       checkPaymentWith.style.display = "flex";
@@ -74,11 +69,11 @@ form.addEventListener("submit", (e) => {
   const errorMessages = [];
   //first name valisation
   if (!/^[A-Za-z\s]+$/.test(fname.value)) {
-    errorMessages.push("First name is required and must contain only letters and whitespaces.");
+    errorMessages.push("First name is required and must contain only english letters and whitespaces.");
   }
   //last name validation
   if (!/^[A-Za-z\s]+$/.test(lname.value)) {
-    errorMessages.push("Last name is required and must contain only letters and whitespaces.");
+    errorMessages.push("Last name is required and must contain only english letters and whitespaces.");
   }
   //security number format validation
   console.log(secNumber.value);
@@ -125,66 +120,63 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
     popup.style.backgroundColor = "rgb(145, 196, 82)";
     const successTitle = document.createElement("h1");
-
     successPopUp.appendChild(successTitle);
     successTitle.innerText = "Your Form was sent successfully!";
     popupContainer.style.display = "flex";
+    //submit form:
+    setTimeout(() => {
+      form.submit();
+    }, 2000);
   }
 });
 
 //exit popup
-popup.addEventListener("click", () => {
+exitPopup.addEventListener("click", () => {
   popupContainer.style.display = "none";
   errorPopUp.innerHTML = "";
   successPopUp.innerHTML = "";
 });
 
-// paymentWithdrawCheck.addEventListener("change", (e) => {
-//   const EligbleCheck = document.querySelector(".EligbleCheck");
-//   console.log(e.target.checked);
-//   if (e.target.checked === true) {
-//     // console.log(checked);
-//     EligbleCheck.style.display = "flex";
-//   } else {
-//     EligbleCheck.style.display = "none";
-//   }
-// });
-
-/* 
-withdrawTypeRadio.addEventListener("click", (e) => {
-  console.log(e.target);
-  const withdrawInputDiv = document.querySelector(".withdrawInputDiv");
-  const checkPaymentWith = document.querySelector(".checkPaymentWith");
-  if (e.target.id === "radio7") {
-    withdrawInputDiv.style.display = "block";
-  } else if (e.target.id === "radio8") {
-    checkPaymentWith.style.display = "border";
+//computed fields (first name field)
+fname.addEventListener("keyup", (e) => {
+  //if there is already text in the fullname field
+  if (fullName.value.includes(" ")) {
+    let lnameTmp = fullName.value.split(" ").slice(1).join(" ");
+    fname.value = fname.value.replace(/[^A-Za-z]/g, "");
+    fullName.value = fname.value + " " + lnameTmp;
   } else {
-    withdrawInputDiv.style.display = "none";
-    checkPaymentWith.style.display = "none";
+    //name can be only one word
+    fname.value = fname.value.replace(/[^A-Za-z]/g, "");
+    fullName.value = fname.value;
   }
 });
 
-automated.addEventListener("click", (e) => {
-  if (e.target.id === "radio8") {
-    const checkPaymentWith = document.querySelector(".checkPaymentWith");
-    checkPaymentWith.style.display = "block";
-  }
-
-  const withdrawInputDiv = document.querySelector(".withdrawInputDiv");
-  if (e.target.id === "radio7") {
-    withdrawInputDiv.style.display = "block";
+//computed fields (last name field)
+lname.addEventListener("keyup", (e) => {
+  //when there is already firstname+lastname in fullname field
+  if (fullName.value.includes(" ")) {
+    let fnameTmp = fullName.value.split(" ")[0];
+    fullName.value = fnameTmp + " " + lname.value;
+    //if there is no charecter in fullname field
+  } else if (fullName.value.length === 0) {
+    console.log("inside", lname.value);
+    fullName.value = " ";
+    //if there is only first name without space after
+  } else if (!fullName.value.includes(" ") && fullName.value.length > 0) {
+    let fnamTmp = fullName.value;
+    fullName.value = fnamTmp + " " + lname.value;
+    //there is a firstname with a whitespace after it
   } else {
-    withdrawInputDiv.style.display = "none";
+    fullName.value = fnamTmp + " " + lname.value;
   }
-}); */
+});
 
-//clear fields:
-btnClear.addEventListener("click", (e) => {
-  e.preventDefault();
-  fname.value = "";
-  lname.value = "";
-  fundName.value = "";
-  accountNumber.value = "";
-  withdraAmount.value = "";
+//computed fields (full name field)
+fullName.addEventListener("keyup", (e) => {
+  if (!fullName.value.includes(" ")) {
+    fname.value = fullName.value;
+  } else if (fullName.value.includes(" ")) {
+    lname.value = e.target.value.split(" ").slice(1).join(" ");
+    fname.value = e.target.value.split(" ").slice(0, 1).join(" ");
+  }
 });

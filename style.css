@@ -51,6 +51,11 @@ body {
   border: none;
 }
 
+input:focus {
+  outline: none;
+  background: rgb(209, 209, 209);
+}
+
 .inputsName input {
   margin: 0.7rem;
   border: none;
