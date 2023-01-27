@@ -153,13 +153,12 @@ fname.addEventListener("keyup", (e) => {
 
 //computed fields (last name field)
 lname.addEventListener("keyup", (e) => {
-  //when there is already firstname+lastname in fullname field
+  //when there is already firstname+lastname in fullname field or only a space
   if (fullName.value.includes(" ")) {
     let fnameTmp = fullName.value.split(" ")[0];
     fullName.value = fnameTmp + " " + lname.value;
     //if there is no charecter in fullname field
   } else if (fullName.value.length === 0) {
-    console.log("inside", lname.value);
     fullName.value = " ";
     //if there is only first name without space after
   } else if (!fullName.value.includes(" ") && fullName.value.length > 0) {
