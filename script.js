@@ -107,13 +107,14 @@ form.addEventListener("submit", (e) => {
     errorPopUp.appendChild(errorTitle);
     errorPopUp.appendChild(errorTitleSecondary);
 
+    errorTitle.innerText = "Form was not Sent!";
+    errorTitleSecondary.innerText = "Please pay attention for the following errors:";
+
     errorMessages.forEach((errorMessage) => {
       const errorDiv = document.createElement("li");
       errorDiv.innerText = errorMessage;
-      errorTitle.innerText = "Form was not Sent!";
-      errorTitleSecondary.innerText = "Please pay attention for the following errors:";
       ul.appendChild(errorDiv);
-      errorPopUp.appendChild(errorDiv);
+      errorPopUp.appendChild(ul);
     });
     popupContainer.style.display = "flex";
   } else {
